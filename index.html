@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Monkey 💖</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cursive: ['Pacifico', 'cursive'],
+                        body: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E6 35%, #F3E7FF 65%, #E0F7FA 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .font-pacifico { font-family: 'Pacifico', cursive; }
+
+        .float-emoji {
+            position: fixed;
+            font-size: 20px;
+            animation: floatUp linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            animation: floatOrb 10s infinite ease-in-out alternate;
+        }
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -50px) scale(1.3); }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(225, 29, 72, 0.1);
+        }
+
+        .pulse-glow {
+            box-shadow: 0 0 15px rgba(225, 29, 72, 0.3);
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(225, 29, 72, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(225, 29, 72, 0.6); }
+            100% { box-shadow: 0 0 15px rgba(225, 29, 72, 0.3); }
+        }
+
+        .bounce-in { animation: bounceIn 1s ease-out; }
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            z-index: 100;
+            animation: confettiFall linear forwards;
+            pointer-events: none;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            animation: sparkleAnim 0.6s ease-out forwards;
+            z-index: 9999;
+        }
+        @keyframes sparkleAnim {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .modal-content { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease; }
+        .modal-overlay.hidden { opacity: 0; pointer-events: none; }
+        .modal-overlay.hidden .modal-content { transform: scale(0.8) translateY(20px); opacity: 0; }
+
+        .pin-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 2px solid #FECDD3;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .pin-dot.filled {
+            background-color: #E11D48;
+            transform: scale(1.2);
+        }
+
+        .key-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffffff, #ffe4e6);
+            color: #E11D48;
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:  5px 5px 10px #fecdd3, -5px -5px 10px #ffffff;
+            transition: all 0.1s;
+            cursor: pointer;
+            user-select: none;
+        }
+        .key-btn:active {
+            box-shadow: inset 3px 3px 6px #fecdd3, inset -3px -3px 6px #ffffff;
+            transform: scale(0.95);
+        }
+
+        .shake { animation: shake 0.5s; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .note-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(225, 29, 72, 0.1);
+            box-shadow: 2px 2px 5px rgba(225, 29, 72, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .note-card:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            z-index: 10;
+        }
+
+        /* Cute Pink Scrollbar */
+        .cute-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .cute-scroll::-webkit-scrollbar-track {
+            background: #FFE4E6;
+            border-radius: 10px;
+        }
+        .cute-scroll::-webkit-scrollbar-thumb {
+            background: #FECDD3;
+            border-radius: 10px;
+        }
+        .cute-scroll::-webkit-scrollbar-thumb:hover {
+            background: #E11D48;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center relative">
+
+    <!-- Soft Background Music (CHANGED TO ROMANTIC INSTRUMENTAL) -->
+    <audio id="bg-music" loop src="happy birthday.mp3"></audio>
+    
+    <!-- Music Toggle Button -->
+    <button id="music-btn" class="fixed top-4 right-4 z-[999] w-14 h-14 rounded-full glass-card flex items-center justify-center text-2xl text-red-500 hover:scale-110 transition-transform shadow-lg active:scale-95">
+        <i class="fa-solid fa-volume-xmark" id="music-icon"></i>
+    </button>
+
+    <!-- Floating Emojis Container -->
+    <div id="float-container"></div>
+
+    <!-- ==================== PAGE 1: INTRO ==================== -->
+    <div id="page1" class="min-h-screen w-full flex flex-col items-center justify-center text-center p-6 relative z-10 overflow-hidden">
+        
+        <div class="orb w-72 h-72 bg-red-200 top-10 left-0"></div>
+        <div class="orb w-80 h-80 bg-purple-300 bottom-10 right-0" style="animation-delay: 2s;"></div>
+        <div class="orb w-56 h-56 bg-pink-200 top-1/2 left-1/4" style="animation-delay: 4s;"></div>
+
+        <!-- CHANGED THE TEXT HERE -->
+        <p class="text-red-400 text-sm md:text-lg font-bold tracking-widest uppercase mb-6 opacity-80 relative z-10">A little surprise for my favorite person in the world 🌍💖</p>
+        
+        <div class="glass-card p-8 md:p-12 rounded-3xl max-w-md w-full relative z-10 bounce-in">
+            <!-- CHANGED TITLE HERE -->
+            <h1 class="text-4xl md:text-5xl font-pacifico text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 mb-4 drop-shadow-md">Happy Birthday Monkey!</h1>
+            <p class="text-gray-600 text-lg mb-8 font-semibold">Do you want to see your birthday gift? 🎁</p>
+            
+            <div class="flex flex-col items-center gap-4 relative h-28">
+                <button id="btn-yes" class="bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold py-3 px-10 rounded-full text-xl shadow-lg transition-all hover:shadow-red-300/50 hover:shadow-xl active:scale-95 z-10 pulse-glow">
+                    Yes Please! 🥺
+                </button>
+                <button id="btn-no" class="bg-gray-200/80 text-gray-500 font-bold py-2 px-6 rounded-full text-sm absolute bottom-0 right-1/4 transition-all duration-200 z-0">
+                    No 💔
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 2: GIFTS ==================== -->
+    <div id="page2" class="min-h-screen w-full flex flex-col items-center justify-center text-center p-6 relative z-10 hidden">
+        <div class="orb w-72 h-72 bg-rose-300 top-20 right-10"></div>
+        <div class="orb w-64 h-64 bg-red-100 bottom-20 left-10" style="animation-delay: 3s;"></div>
+
+        <!-- CHANGED THE TEXT HERE TOO -->
+        <p class="text-red-400 text-sm md:text-lg font-bold tracking-widest uppercase mb-6 opacity-80">A little surprise for my favorite person in the world 🌍💖</p>
+        
+        <h2 class="text-3xl md:text-5xl font-pacifico text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 mb-2 drop-shadow-md">THESE ARE FOR YOU!</h2>
+        <p class="text-gray-500 mb-10 text-lg">I hope you like them, I love you! 💖</p>
+
+        <div class="grid grid-cols-2 gap-6 max-w-sm w-full">
+            <!-- Letter -->
+            <div onclick="openModal('modal-letter')" class="glass-card p-6 rounded-3xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all duration-300 group">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-red-100 to-pink-100 flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-scroll text-3xl text-red-500"></i>
+                </div>
+                <span class="font-bold text-red-700 text-lg">Letter</span>
+            </div>
+            <!-- Lock -->
+            <div onclick="openModal('modal-lock')" class="glass-card p-6 rounded-3xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all duration-300 group">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-lock text-3xl text-purple-500"></i>
+                </div>
+                <span class="font-bold text-red-700 text-lg">Secret</span>
+            </div>
+            <!-- Album -->
+            <div onclick="openModal('modal-album')" class="glass-card p-6 rounded-3xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all duration-300 group">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-pink-100 to-blue-100 flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-camera-retro text-3xl text-pink-600"></i>
+                </div>
+                <span class="font-bold text-red-700 text-lg">Album</span>
+            </div>
+            <!-- Rose -->
+            <div onclick="openModal('modal-rose')" class="glass-card p-6 rounded-3xl flex flex-col items-center cursor-pointer hover:scale-105 transition-all duration-300 group">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-red-100 to-rose-200 flex items-center justify-center mb-3 group-hover:rotate-12 transition-transform">
+                    <i class="fa-solid fa-spa text-3xl text-red-600"></i>
+                </div>
+                <span class="font-bold text-red-700 text-lg">Rose</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- LETTER MODAL -->
+    <div id="modal-letter" class="modal-overlay hidden fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        
+        <div class="modal-content p-6 md:p-8 rounded-3xl shadow-2xl border-2 border-red-100 w-full max-w-md max-h-[85vh] flex flex-col relative text-left bg-[url('letters.png')] bg-cover bg-center bg-no-repeat bg-[#FFFEF5]">
+            
+            <button onclick="closeModal('modal-letter')" class="absolute top-4 right-4 text-red-400 hover:text-red-700 text-2xl z-30 transition-colors bg-white/60 md:bg-transparent rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-sm">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6 flex-shrink-0 pt-4">
+                <h3 class="font-pacifico text-3xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500">My Dearest,</h3>
+            </div>
+
+            <div class="cute-scroll overflow-y-auto flex-1 min-h-0 pr-2">
+               <p class="text-red-900 font-serif italic text-lg leading-relaxed mb-4 font-medium">
+                Happy Birthday to the most amazing person in my life! Even though we are miles apart, my love for you only grows stronger every day. 
+            </p>
+           <p class="text-red-900 font-serif italic text-lg leading-relaxed mb-4 font-medium">
+                You are my everything, and I can't wait for the day I can finally meet you. Until then, keep smiling, because your smile is my whole world.
+            </p>
+              <p class="text-red-900 font-serif italic text-lg leading-relaxed mb-4 font-medium">
+                Today is not just your birthday... it's the day someone truly special came into this world and somehow made mine brighter, funnier, and way more meaningful.
+              </p>
+            <p class="text-red-900 font-serif italic text-lg leading-relaxed mb-4 font-medium">
+                I still don't know how to describe what you are to me. You are my best friend, my partner, my safe place, my happiness, and honestly... my everything. Life feels lighter when you are around, and even the boring days turn into memories when I'm with you.
+            </p>
+             <p class="text-red-900 font-serif italic text-lg leading-relaxed mb-4 font-medium">
+                You annoy me sometimes, you make me laugh all the time, and you somehow understand me even when I don't say a single word. That's rare. That's you
+             </p>
+             <p class="text-red-900 font-serif italic text-lg leading-relaxed mb-4 font-medium">
+                On your birthday, I just want you to know how grateful l am for you. For your pred the ay you never give mommeets, hope this year brings you endless smiles, success, peace, and everything your heart quietly wishes for. •
+And no matter where life takes us, I hope we always find our way back to each other—because people like you don t come twice
+             </p>
+             <p class="text-red-900 font-serif italic text-lg leading-relaxed mb-4 font-medium">
+                Happy Birthday again, my monkey You mean more to me than words can ever explain.
+             </p>
+                <div class="text-right mt-6 pb-4">
+                    <p class="font-pacifico text-3xl text-red-800">Love you endlessly ❤️</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOCK MODAL -->
+    <div id="modal-lock" class="modal-overlay hidden fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="modal-content bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-2xl border-2 border-white/50 max-w-sm w-full relative text-center">
+            <button onclick="closeModal('modal-lock')" class="absolute top-4 right-4 text-red-400 hover:text-red-700 text-2xl z-10 transition-colors"><i class="fa-solid fa-circle-xmark"></i></button>
+            
+            <div id="lock-content">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-red-100 to-pink-200 flex items-center justify-center mx-auto mb-4 animate-bounce">
+                    <i class="fa-solid fa-heart text-2xl text-red-600"></i>
+                </div>
+                <h3 class="font-pacifico text-2xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 mb-2">Enter a passcode</h3>
+                <p class="text-gray-400 text-sm mb-6">It's a secret! 🤫</p>
+                
+                <div class="flex justify-center gap-4 mb-8">
+                    <div class="pin-dot" id="dot1"></div>
+                    <div class="pin-dot" id="dot2"></div>
+                    <div class="pin-dot" id="dot3"></div>
+                    <div class="pin-dot" id="dot4"></div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-y-4 gap-x-6 justify-items-center max-w-[260px] mx-auto">
+                    <button class="key-btn" onclick="addPin('1')">1</button>
+                    <button class="key-btn" onclick="addPin('2')">2</button>
+                    <button class="key-btn" onclick="addPin('3')">3</button>
+                    <button class="key-btn" onclick="addPin('4')">4</button>
+                    <button class="key-btn" onclick="addPin('5')">5</button>
+                    <button class="key-btn" onclick="addPin('6')">6</button>
+                    <button class="key-btn" onclick="addPin('7')">7</button>
+                    <button class="key-btn" onclick="addPin('8')">8</button>
+                    <button class="key-btn" onclick="addPin('9')">9</button>
+                    <button class="key-btn text-lg" onclick="addPin('*')">*</button>
+                    <button class="key-btn" onclick="addPin('0')">0</button>
+                    <button class="key-btn text-xl" onclick="delPin()"><i class="fa-solid fa-delete-left"></i></button>
+                </div>
+
+                <p id="lock-error" class="text-red-400 mt-6 font-bold hidden">Wrong passcode! Try again 💔</p>
+            </div>
+
+            <div id="secret-image" class="hidden">
+                <h3 class="font-pacifico text-2xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 mb-4">You found it! 🥰</h3>
+                <img src="US.png" alt="Secret Image" class="rounded-2xl shadow-lg mx-auto border-4 border-white/50 w-full max-w-[300px] h-auto object-cover">
+            </div>
+        </div>
+    </div>
+
+    <!-- ALBUM MODAL -->
+    <div id="modal-album" class="modal-overlay hidden fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        
+        <div class="modal-content bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-2xl border-2 border-white/50 max-w-md w-full max-h-[85vh] flex flex-col relative text-center">
+            
+            <button onclick="closeModal('modal-album')" class="absolute top-4 right-4 text-red-400 hover:text-red-700 text-2xl z-20 transition-colors"><i class="fa-solid fa-circle-xmark"></i></button>
+            
+            <h3 class="font-pacifico text-2xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 mb-4 flex-shrink-0">My Favorite Person 📸</h3>
+            
+            <div class="cute-scroll overflow-y-auto flex-1 min-h-0 rounded-2xl border-4 border-white/50 shadow-inner bg-white/30 p-2">
+                <img src="flower.jpg" alt="Our Memory" class="w-full h-auto rounded-xl">
+            </div>
+            
+            <p class="text-red-500 mt-4 font-bold italic flex-shrink-0 pb-2">Scroll down to see everything ❤️</p>
+        </div>
+    </div>
+
+    <!-- ROSE MODAL -->
+    <div id="modal-rose" class="modal-overlay hidden fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="modal-content bg-[#FFF8F0] p-6 md:p-8 rounded-3xl shadow-2xl border-2 border-red-100 max-w-sm w-full relative text-center max-h-[90vh] overflow-y-auto cute-scroll">
+            <button onclick="closeModal('modal-rose')" class="absolute top-4 right-4 text-red-400 hover:text-red-700 text-2xl transition-colors z-20"><i class="fa-solid fa-circle-xmark"></i></button>
+            
+            <div class="note-card p-4 rounded-xl mb-4 transform -rotate-2 relative z-10">
+                <h3 class="font-pacifico text-3xl text-red-600 drop-shadow-md">This Is For You 💝</h3>
+            </div>
+            
+            <div class="relative my-6 flex flex-col items-center z-10">
+                <img src="rose.jpg" alt="Rose" class="w-3/4 max-w-[220px] rounded-2xl shadow-xl border-4 border-white transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                
+                <div class="mt-4 bg-red-100 px-5 py-2 rounded-full border border-red-200 shadow-sm transform rotate-1 hover:rotate-0 transition-transform">
+                    <span class="text-red-600 font-bold text-xs uppercase tracking-widest">Your favorite flower 🌹 ROSES</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-6 relative z-10">
+                <div class="note-card p-3 rounded-xl transform rotate-1">
+                    <p class="text-red-800 font-medium text-sm">You make my heart skip a beat 💓</p>
+                </div>
+                <div class="note-card p-3 rounded-xl transform -rotate-2">
+                    <p class="text-red-800 font-medium text-sm">Forever yours, forever true ❤️</p>
+                </div>
+                <div class="note-card p-3 rounded-xl transform -rotate-1">
+                    <p class="text-red-800 font-medium text-sm">My favorite person in the world 🌍</p>
+                </div>
+                <div class="note-card p-3 rounded-xl transform rotate-2">
+                    <p class="text-red-800 font-medium text-sm">I love you to the moon and back 🌙</p>
+                </div>
+                <div class="note-card p-3 rounded-xl transform -rotate-3 col-span-2">
+                    <p class="text-red-800 font-medium text-sm">Happy Birthday, my love! May your day be as beautiful as you are to me. 🥰</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // --- Soft Music Control ---
+        const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        bgMusic.volume = 0.3; 
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.className = 'fa-solid fa-volume-xmark';
+            } else {
+                bgMusic.play().catch(e => console.log("Autoplay blocked"));
+                musicIcon.className = 'fa-solid fa-volume-high';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        document.body.addEventListener('click', () => {
+            if (!isPlaying) {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = 'fa-solid fa-volume-high';
+                }).catch(e => {});
+            }
+        }, { once: true });
+
+
+        // --- Page Navigation ---
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+
+        document.getElementById('btn-yes').addEventListener('click', () => {
+            launchConfetti();
+            page1.style.opacity = '0';
+            page1.style.transform = 'scale(0.95)';
+            page1.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                page1.classList.add('hidden');
+                page2.classList.remove('hidden');
+                page2.style.opacity = '0';
+                page2.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    page2.style.opacity = '1';
+                    page2.style.transform = 'scale(1)';
+                    page2.style.transition = 'all 0.5s ease';
+                }, 50);
+            }, 500);
+        });
+
+        // --- Run Away "No" Button ---
+        const noBtn = document.getElementById('btn-no');
+
+        function moveNoButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.clientWidth - 40);
+            const y = Math.random() * (window.innerHeight - noBtn.clientHeight - 40);
+            
+            noBtn.style.position = 'fixed'; 
+            noBtn.style.left = `${Math.max(20, x)}px`;
+            noBtn.style.top = `${Math.max(20, y)}px`;
+            noBtn.innerText = "Can't catch me! 😜";
+        }
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); 
+            moveNoButton();
+        });
+
+        // --- Modals ---
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.add('hidden');
+                }
+            });
+        });
+
+        // --- Passcode Lock Logic ---
+        const correctPasscode = "1431"; // 4-DIGIT PASSCODE
+        let currentPin = "";
+
+        function addPin(num) {
+            if(currentPin.length < 4) {
+                currentPin += num;
+                updateDots();
+                createClickSparkle(event);
+                
+                if(currentPin.length === 4) {
+                    setTimeout(checkPasscode, 300);
+                }
+            }
+        }
+
+        function delPin() {
+            currentPin = currentPin.slice(0, -1);
+            updateDots();
+            document.getElementById('lock-error').classList.add('hidden');
+        }
+
+        function updateDots() {
+            for(let i = 1; i <= 4; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                if(i <= currentPin.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            }
+        }
+
+        function checkPasscode() {
+            const lockContent = document.getElementById('lock-content');
+            const secretImage = document.getElementById('secret-image');
+            const lockError = document.getElementById('lock-error');
+
+            if (currentPin === correctPasscode) {
+                lockContent.classList.add('hidden');
+                secretImage.classList.remove('hidden');
+                launchConfetti();
+            } else {
+                lockError.classList.remove('hidden');
+                lockContent.classList.add('shake');
+                setTimeout(() => {
+                    lockContent.classList.remove('shake');
+                    currentPin = "";
+                    updateDots();
+                }, 600);
+            }
+        }
+
+        // --- Background Floating Emojis ---
+        const floatContainer = document.getElementById('float-container');
+        const emojis = ['❤️', '✨', '💖', '🌹', '🦋', '🌸', '❣️', '🧧', '💋'];
+
+        function createFloatingEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('float-emoji');
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = Math.random() * 7 + 8 + 's';
+            emoji.style.fontSize = Math.random() * 16 + 14 + 'px';
+            
+            floatContainer.appendChild(emoji);
+            setTimeout(() => { emoji.remove(); }, 15000);
+        }
+
+        setInterval(createFloatingEmoji, 1000);
+
+        // --- Click Sparkle Effect ---
+        function createClickSparkle(e) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = (e.clientX - 10) + 'px';
+            sparkle.style.top = (e.clientY - 10) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 600);
+        }
+
+        document.addEventListener('click', (e) => {
+            createClickSparkle(e);
+        });
+
+        // --- Confetti Effect ---
+        function launchConfetti() {
+            for (let i = 0; i < 100; i++) {
+                createConfettiPiece();
+            }
+        }
+
+        function createConfettiPiece() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            
+            const colors = ['#FF5C8A', '#D946EF', '#E11D48', '#3B82F6', '#FFE4E6', '#FFD700', '#87CEEB'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+            confetti.style.width = Math.random() * 8 + 6 + 'px';
+            confetti.style.height = Math.random() * 8 + 6 + 'px';
+            
+            if(Math.random() > 0.5) confetti.style.borderRadius = '50%';
+            else confetti.style.borderRadius = '2px';
+            
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 4000);
+        }
+
+    </script>
+</body>
+</html>
